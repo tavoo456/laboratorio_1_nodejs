@@ -1,105 +1,91 @@
+import e from "express";
 import * as userServices from "../services/autoresServices.js";
-import bcrypt from "bcryptjs";
 
-/* export const getUsuarios = async (req, res, next) => {
+export const getAutores = async (req, res, next) => {
   try {
-    const usuarios = await userServices.getUsuarios();
+    const autores = await userServices.getAutores();
 
-    res.json(usuarios);
+    res.json(autores);
   } catch (error) {
     return next(error);
   }
 };
 
-export const getUsuarioByEmail = async (req, res, next) => {
-  const { email } = req.params;
-
+export const getAutorById = async (req, res, next) => {
   try {
-    const usuario = await userServices.getUsuarioByEmail(email);
-
-    if (!usuario) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+    const { id_autor } = req.params;
+    const autor = await userServices.getAutorById(id_autor);
+    if (!autor) {
+      return res
+        .status(404)
+        .json({ status: "Error", message: "Autor no encontrado" });
     }
-
-    res.json(usuario);
+    res.json(autor);
   } catch (error) {
     return next(error);
   }
 };
 
-export const getUsuarioByNombre = async (req, res, next) => {
-  const { nombre } = req.params;
-
+export const postInsertarAutor = async (req, res, next) => {
   try {
-    const usuario = await userServices.getUsuarioByNombre(nombre);
+    const { nombre, nacionalidad, biografia, correo } = req.body;
 
-    res.json(usuario);
-  } catch (error) {
-    return next(error);
-  }
-};
-
-export const postInsertarUsuario = async (req, res, next) => {
-  const SALT_ROUNDS = 10;
-  const salt = bcrypt.genSaltSync(SALT_ROUNDS);
-  const { nombre, email, documento, carnet, contrasenia } = req.body;
-  const contraseniaHash = bcrypt.hashSync(contrasenia, salt);
-
-  try {
-    const nuevoUsuario = await userServices.postInsertarUsuario(
+    const nuevoAutor = await userServices.postInsertarAutor(
       nombre,
-      email,
-      documento,
-      carnet,
-      contraseniaHash
+      nacionalidad,
+      biografia,
+      correo
     );
 
-    res.status(201).json(nuevoUsuario);
+    res.status(201).json(nuevoAutor);
   } catch (error) {
     return next(error);
   }
 };
 
-export const putActualizarUsuario = async (req, res, next) => {
+export const putActualizarAutor = async (req, res, next) => {
   try {
-    const { id_usuario } = req.params;
-    const { nombre, email, documento, carnet, contrasenia } = req.body;
+    const { id_autor } = req.params;
+    const { nombre, nacionalidad, biografia, correo } = req.body;
+    const autorExistente = await userServices.getAutorById(id_autor);
 
-    const usuario = {
-      id_usuario,
-      nombre,
-      email,
-      documento,
-      carnet,
-      contrasenia,
+    if (!autorExistente) {
+      return res
+        .status(404)
+        .json({ status: "Error", message: "Autor no encontrado" });
+    }
+
+    const autorActualizado = {
+      id_autor: parseInt(id_autor),
+      nombre: nombre || autorExistente.nombre,
+      nacionalidad: nacionalidad || autorExistente.nacionalidad,
+      biografia: biografia || autorExistente.biografia,
+      correo: correo || autorExistente.correo,
     };
 
-    const usuarioActualizado = await userServices.putActualizarUsuario(usuario);
+    const resultado = await userServices.putActualizarAutor(autorActualizado);
 
-    if (!usuarioActualizado) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
-    }
-
-    res.json(usuarioActualizado);
+    res.json(resultado);
   } catch (error) {
     return next(error);
   }
 };
 
-export const deleteEliminarUsuario = async (req, res, next) => {
-  const { id_usuario } = req.params;
-
+export async function deleteEliminarAutor(req, res, next) {
   try {
-    const usuarioEliminado = await userServices.deleteEliminarUsuario(
-      id_usuario
-    );
+    const { id_autor } = req.params;
+    const autorExistente = await userServices.getAutorById(id_autor);
 
-    if (!usuarioEliminado) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+    if (!autorExistente) {
+      return res
+        .status(404)
+        .json({ status: "Error", message: "Autor no encontrado" });
     }
 
-    res.json({ message: "Usuario eliminado correctamente.", usuarioEliminado });
+    const resultado = await userServices.deleteEliminarAutor(id_autor);
+
+    res.json({ status: "Éxito", message: "Autor eliminado", data: resultado });
   } catch (error) {
     return next(error);
   }
-};*/
+}
