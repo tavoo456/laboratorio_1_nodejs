@@ -1,4 +1,4 @@
-import { body, params, validationResult } from "express-validator";
+import { body, validationResult } from "express-validator";
 
 export const runValidations = (validations) => {
   return async (req, res, next) => {
@@ -38,11 +38,6 @@ export const insertarAutorValidator = [
 ];
 
 export const actualizarAutorValidator = [
-  params("id_autor")
-    .notEmpty()
-    .withMessage("El ID del autor es obligatorio")
-    .isInt({ gt: 0 })
-    .withMessage("El ID del autor debe ser un número entero positivo"),
   body("nombre")
     .optional()
     .trim()

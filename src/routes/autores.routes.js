@@ -1,9 +1,8 @@
 import { Router } from "express";
-//import * as userController from "../controllers/usersController.js";
 import * as autoresController from "../controllers/autoresController.js";
 import {
   runValidations,
-  insertarUsuarioValidator,
+  insertarAutorValidator,
   actualizarAutorValidator,
 } from "../middlewares/validator.js";
 
@@ -12,7 +11,7 @@ router.get("/", autoresController.getAutores);
 router.get("/:id_autor", autoresController.getAutorById);
 router.post(
   "/",
-  runValidations(insertarUsuarioValidator),
+  runValidations(insertarAutorValidator),
   autoresController.postInsertarAutor
 );
 router.put(
