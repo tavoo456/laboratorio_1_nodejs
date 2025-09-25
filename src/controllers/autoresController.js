@@ -48,6 +48,7 @@ export const putActualizarAutor = async (req, res, next) => {
   try {
     const { id_autor } = req.params;
     const { nombre, nacionalidad, biografia, correo } = req.body;
+
     const autorExistente = await userServices.getAutorById(id_autor);
 
     if (!autorExistente) {
@@ -57,7 +58,7 @@ export const putActualizarAutor = async (req, res, next) => {
     }
 
     const autorActualizado = {
-      id_autor: parseInt(id_autor),
+      id_autor: id_autor,
       nombre: nombre || autorExistente.nombre,
       nacionalidad: nacionalidad || autorExistente.nacionalidad,
       biografia: biografia || autorExistente.biografia,
