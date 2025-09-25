@@ -13,10 +13,10 @@ router.get(
   "/anio_publicacion/:anio_publicacion",
   librosContoller.getLibroByAnioPublicacion
 );
-router.get("/autor/:nombre_autor", librosContoller.getLibroByIdAutor);
+router.get("/autor/:nombre_autor", librosContoller.getLibroByAutor);
 router.get(
   "/categoria/:nombre_categoria",
-  librosContoller.getLibroByIdCategoria
+  librosContoller.getLibroByCategoria
 );
 router.get(
   "/clasificacion/:clasificacion",
@@ -34,3 +34,5 @@ router.put(
   librosContoller.putActualizarLibro
 );
 router.delete("/:id_libro", librosContoller.deleteLibro);
+
+export default router;

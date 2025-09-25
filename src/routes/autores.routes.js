@@ -20,16 +20,5 @@ router.put(
   autoresController.putActualizarAutor
 );
 router.delete("/:id_autor", autoresController.deleteEliminarAutor);
-/*
-router.get("/", userController.getUsuarios);
-router.get("/buscarPorEmail/:email", userController.getUsuarioByEmail);
-router.get("/buscarPorNombre/:nombre", userController.getUsuarioByNombre);
-router.post(
-  "/",
-  runValidations(insertarUsuarioValidator),
-  userController.postInsertarUsuario
-);
-router.put("/:id_usuario", userController.putActualizarUsuario);
-router.delete("/:id_usuario", userController.deleteEliminarUsuario);
-*/
+
 export default router;

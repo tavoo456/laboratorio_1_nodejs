@@ -48,7 +48,7 @@ export const getLibroByAnioPublicacion = async (anio_publicacion) => {
   return rows.rows;
 };
 
-export const getLibroByIdAutor = async (nombre_autor) => {
+export const getLibroByAutor = async (nombre_autor) => {
   const rows = await pool.query(
     `SELECT * FROM libros l JOIN autores a ON l.autor_id = a.id_autor WHERE a.nombre = $1`,
     [nombre_autor]

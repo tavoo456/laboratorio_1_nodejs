@@ -45,10 +45,10 @@ export const getLibroByAnioPublicacion = async (req, res, next) => {
   }
 };
 
-export const getLibroByIdAutor = async (req, res, next) => {
+export const getLibroByAutor = async (req, res, next) => {
   try {
     const { nombre_autor } = req.params;
-    const libros = await librosServices.getLibroByIdAutor(nombre_autor);
+    const libros = await librosServices.getLibroByAutor(nombre_autor);
     if (libros.length === 0) {
       return res.status(404).json({
         status: "Error",

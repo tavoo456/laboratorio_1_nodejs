@@ -112,3 +112,31 @@ export const insertarLibroValidator = [
     .withMessage("El ID de la categoría es obligatorio"),
   body("resumen").trim().optional(),
 ];
+
+export const actualizarLibroValidator = [
+  body("titulo")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("El título no puede estar vacío"),
+  body("anio_publicacion")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("El año de publicación no puede estar vacío")
+    .isInt({ gt: 1900 })
+    .withMessage(
+      "El año de publicación debe ser un número entero mayor a 1900"
+    ),
+  body("autor_id")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("El ID del autor no puede estar vacío"),
+  body("categoria_id")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("El ID de la categoría no puede estar vacío"),
+  body("resumen").trim().optional(),
+];
