@@ -1,28 +1,3 @@
-/*
-autores
-
-id_autor (PK, UUID)
-nombre (requerido)
-nacionalidad (opcional)
-biografia (opcional)
-correo (requerido)
-
-categorias
-
-id_categoria (PK, UUID)
-nombre_categoria (requerido)
-clasificación (requerido)
-
-libros
-
-id_libro (PK, UUID)
-titulo (requerido, min. 10 caracteres)
-anio_publicacion (int, requerido, mayor a 1900)
-autor_id (FK hacia autores.id_autor)
-categoría_id (FK hacia categorías.id_categoria)
-resumen (opcional) 
-*/
-
 import { pool } from "../db.js";
 
 export const getLibros = async () => {
@@ -50,7 +25,7 @@ export const getLibroByAnioPublicacion = async (anio_publicacion) => {
 
 export const getLibroByAutor = async (nombre_autor) => {
   const rows = await pool.query(
-    `SELECT * FROM libros l JOIN autores a ON l.autor_id = a.id_autor WHERE a.nombre = $1`,
+    `SELECT l.titulo, l.anio_publicacion, l.resumen, a.nombre FROM libros l JOIN autores a ON l.autor_id = a.id_autor WHERE a.nombre = $1`,
     [nombre_autor]
   );
 
@@ -59,7 +34,7 @@ export const getLibroByAutor = async (nombre_autor) => {
 
 export const getLibroByCategoria = async (nombre_categoria) => {
   const rows = await pool.query(
-    `SELECT * FROM libros l JOIN categorias c ON l.categoria_id = c.id_categorias WHERE c.nombre_categoria = $1`,
+    `SELECT l.titulo, l.anio_publicacion, l.resumen, c.nombre_categoria FROM libros l JOIN categorias c ON l.categoria_id = c.id_categorias WHERE c.nombre_categoria = $1`,
     [nombre_categoria]
   );
 
@@ -68,7 +43,7 @@ export const getLibroByCategoria = async (nombre_categoria) => {
 
 export const getLibroByClasificacionCategoria = async (clasificacion) => {
   const rows = await pool.query(
-    `SELECT l.* FROM libros l JOIN categorias c ON l.categoria_id = c.id_categorias WHERE c.clasificacion = $1`,
+    `SELECT l.*, c.clasificacion FROM libros l JOIN categorias c ON l.categoria_id = c.id_categorias WHERE c.clasificacion = $1`,
     [clasificacion]
   );
 

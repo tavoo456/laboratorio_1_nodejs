@@ -1,27 +1,3 @@
-/*
-autores
-
-id_autor (PK, UUID)
-nombre (requerido)
-nacionalidad (opcional)
-biografia (opcional)
-correo (requerido)
-
-categorias
-
-id_categoria (PK, UUID)
-nombre_categoria (requerido)
-clasificación (requerido)
-
-libros
-
-id_libro (PK, UUID)
-titulo (requerido, min. 10 caracteres)
-anio_publicacion (int, requerido, mayor a 1900)
-autor_id (FK hacia autores.id_autor)
-categoría_id (FK hacia categorías.id_categoria)
-resumen (opcional) 
-*/
 
 import { body, validationResult } from "express-validator";
 

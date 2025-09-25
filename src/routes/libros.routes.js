@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as librosContoller from "../controllers/librosController.js";
+import * as librosController from "../controllers/librosController.js";
 import {
   runValidations,
   insertarLibroValidator,
@@ -7,32 +7,32 @@ import {
 } from "../middlewares/validator.js";
 
 const router = Router();
-router.get("/", librosContoller.getLibros);
-router.get("/:id_libro", librosContoller.getLibroById);
+router.get("/", librosController.getLibros);
+router.get("/:id_libro", librosController.getLibroById);
 router.get(
   "/anio_publicacion/:anio_publicacion",
-  librosContoller.getLibroByAnioPublicacion
+  librosController.getLibroByAnioPublicacion
 );
-router.get("/autor/:nombre_autor", librosContoller.getLibroByAutor);
+router.get("/autor/:nombre_autor", librosController.getLibroByAutor);
 router.get(
   "/categoria/:nombre_categoria",
-  librosContoller.getLibroByCategoria
+  librosController.getLibroByCategoria
 );
 router.get(
   "/clasificacion/:clasificacion",
-  librosContoller.getLibroByClasificacionCategoria
+  librosController.getLibroByClasificacionCategoria
 );
 router.post(
   "/",
   runValidations(insertarLibroValidator),
-  librosContoller.postInsertarLibro
+  librosController.postInsertarLibro
 );
 
 router.put(
   "/:id_libro",
   runValidations(actualizarLibroValidator),
-  librosContoller.putActualizarLibro
+  librosController.putActualizarLibro
 );
-router.delete("/:id_libro", librosContoller.deleteLibro);
+router.delete("/:id_libro", librosController.deleteLibro);
 
 export default router;
