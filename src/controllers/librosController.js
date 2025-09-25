@@ -157,7 +157,7 @@ export const deleteLibro = async (req, res, next) => {
         .json({ status: "Error", message: "Libro no encontrado" });
     }
 
-    await librosServices.deleteLibro(id_libro);
+    await librosServices.deleteEliminarLibro(id_libro);
 
     res.json({ status: "OK", message: "Libro eliminado correctamente" });
   } catch (error) {

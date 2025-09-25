@@ -59,7 +59,7 @@ export const getLibroByAutor = async (nombre_autor) => {
 
 export const getLibroByCategoria = async (nombre_categoria) => {
   const rows = await pool.query(
-    `SELECT * FROM libros l JOIN categorias c ON l.categoria_id = c.id_categoria WHERE c.nombre_categoria = $1`,
+    `SELECT * FROM libros l JOIN categorias c ON l.categoria_id = c.id_categorias WHERE c.nombre_categoria = $1`,
     [nombre_categoria]
   );
 
@@ -68,7 +68,7 @@ export const getLibroByCategoria = async (nombre_categoria) => {
 
 export const getLibroByClasificacionCategoria = async (clasificacion) => {
   const rows = await pool.query(
-    `SELECT l.* FROM libros l JOIN categorias c ON l.categoria_id = c.id_categoria WHERE c.clasificacion = $1`,
+    `SELECT l.* FROM libros l JOIN categorias c ON l.categoria_id = c.id_categorias WHERE c.clasificacion = $1`,
     [clasificacion]
   );
 
