@@ -1,4 +1,3 @@
-import e from "express";
 import * as userServices from "../services/autoresServices.js";
 
 export const getAutores = async (req, res, next) => {
@@ -15,11 +14,13 @@ export const getAutorById = async (req, res, next) => {
   try {
     const { id_autor } = req.params;
     const autor = await userServices.getAutorById(id_autor);
+
     if (!autor) {
       return res
         .status(404)
         .json({ status: "Error", message: "Autor no encontrado" });
     }
+
     res.json(autor);
   } catch (error) {
     return next(error);
