@@ -27,3 +27,12 @@ export const putActualizarCategoria = async (categoria) => {
 
     return result.rows[0];
 };
+
+export const eliminarCategoria = async (id_categoria) => {
+    const categoriaAEliminar = await pool.query(`SELECT * FROM categorias WHERE id_categorias=$1`, [id_categoria]);
+
+    if (categoriaAEliminar.rowCount === 0) throw new Error( 'Categoria no encontrada');
+    
+    const result = await pool.query(`DELETE FROM categorias WHERE id_categorias=$1`, [id_categoria]);
+    return { message: 'Categoria eliminada correctamente', categoria: categoriaAEliminar.rows[0] };
+};

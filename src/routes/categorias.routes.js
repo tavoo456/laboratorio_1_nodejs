@@ -16,7 +16,7 @@ router.put(
   "/:id_categorias",
   categoriasController.putActualizarCategoria
 );
-// router.delete("/:id_autor", autoresController.deleteEliminarAutor);
+router.delete("/:id_categorias", categoriasController.deleteEliminarCategoria);
 /*
 router.get("/", userController.getUsuarios);
 router.get("/buscarPorEmail/:email", userController.getUsuarioByEmail);

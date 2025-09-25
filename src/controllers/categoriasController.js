@@ -31,3 +31,13 @@ export const putActualizarCategoria = async (req, res, next) => {
         return next(err);
     }
 };
+
+export const deleteEliminarCategoria = async (req, res, next) => {
+    try{
+        const { id_categorias } = req.params;
+        const result = await catServices.eliminarCategoria(id_categorias);
+        res.json(result);
+    }catch(err){
+        return next(err);
+    }
+};
