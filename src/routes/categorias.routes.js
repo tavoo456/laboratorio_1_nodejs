@@ -1,23 +1,21 @@
 import { Router } from "express";
 import * as categoriasController from "../controllers/categoriasController.js";
 import {
-  runValidations,
-  insertarCategoriaValidator
+  runValidations, insertarCategoriaValidator
 } from "../middlewares/validator.js";
 
 const router = Router();
 router.get("/", categoriasController.getObtenerTodosLasCategorias);
 // router.get("/:id_autor", autoresController.getAutorById);
-// router.post(
-//   "/",
-//   runValidations(insertarAutorValidator),
-//   autoresController.postInsertarAutor
-// );
-// router.put(
-//   "/:id_autor",
-//   runValidations(actualizarAutorValidator),
-//   autoresController.putActualizarAutor
-// );
+router.post(
+   "/",
+   runValidations(insertarCategoriaValidator),
+   categoriasController.postCrearCategoria
+);
+router.put(
+  "/:id_categorias",
+  categoriasController.putActualizarCategoria
+);
 // router.delete("/:id_autor", autoresController.deleteEliminarAutor);
 /*
 router.get("/", userController.getUsuarios);

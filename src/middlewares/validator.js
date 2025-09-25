@@ -18,7 +18,7 @@ export const runValidations = (validations) => {
 // Validadores para la tabla autore
 
 export const insertarAutorValidator = [
-  body("nombre").notEmpty().withMessage("El nombre es obligatorio"),
+  body("nombre").notEmpty().trim().withMessage("El nombre es obligatorio"),
   body("correo")
     .trim()
     .notEmpty()
@@ -47,8 +47,8 @@ export const actualizarAutorValidator = [
 
 export const insertarCategoriaValidator = [
   body("nombre_categoria")
-  .trim()
   .notEmpty()
+  .trim()
   .withMessage("El nombre de categoria es obligatorio"),
   body("clasificacion")
     .notEmpty()
