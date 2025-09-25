@@ -41,3 +41,17 @@ export const actualizarAutorValidator = [
     .isEmail()
     .withMessage("El correo NO es válido"),
 ];
+
+
+// Validadores para la tabla categorias
+
+export const insertarCategoriaValidator = [
+  body("nombre_categoria")
+  .trim()
+  .notEmpty()
+  .withMessage("El nombre de categoria es obligatorio"),
+  body("clasificacion")
+    .notEmpty()
+    .trim()
+    .withMessage("La nacionalidad debe tener al menos 2 caracteres")
+];
